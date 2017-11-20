@@ -1,91 +1,37 @@
-import java.awt.EventQueue;
+import javax.swing.JOptionPane;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+/**
+ *  This class will take in the information on how often the user wants to check deals as well as the deals themselves. 
+ *  This class should only have method calls to get data
+ */
 
+/**
+ * @author matthew
+ *
+ */
 public class InitialSetup {
 
-	public int numberOfKeywords;
-	public int timeInterval;
-	private JFrame frame;
-	private JTextField amountOfItemsTextField;
-	private JLabel mainLabel;
-
 	/**
-	 * Launch the application.
+	 * @param args
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InitialSetup window = new InitialSetup();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	int amountOfItems;
+	int timeInterval;
+	String[] keywords;
+	public int getAmountOfItems() {
+		amountOfItems = Integer.parseInt(JOptionPane.showInputDialog("Enter The Amount Of Items"));
+		return amountOfItems;
 	}
-
-	/**
-	 * Create the application.
-	 */
-	public InitialSetup() {
-		initialize();
+	public int getTimeInterval() {
+		timeInterval = Integer.parseInt(JOptionPane.showInputDialog("How Often Do You Want To Check For Deals (In Minutes)"));
+		return timeInterval;
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 449, 142);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		mainLabel = DefaultComponentFactory.getInstance().createLabel("How Many Items Do You Want To Track?");
-		mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		mainLabel.setBounds(6, 6, 437, 16);
-		frame.getContentPane().add(mainLabel);
-		handleAmountOfItems();
-		
-		
+	public String[] getKeywords() {
+		keywords = new String[amountOfItems];
+		for(int i = 0; i < amountOfItems; i++) {
+			keywords[i] = JOptionPane.showInputDialog("Enter The Item You Want To Find A Deal On (" + (i + 1) + "/" + amountOfItems + ")");
+		}
+		return keywords;
 	}
 	
-	private void handleAmountOfItems() {
-		//Deal with the amountOfItemsTextField and getting the data right here....
-				amountOfItemsTextField = new JTextField();
-				amountOfItemsTextField.addActionListener(new ActionListener() { //Upon the user pressing enter.... 
-					public void actionPerformed(ActionEvent e) {
-						numberOfKeywords = Integer.parseInt(amountOfItemsTextField.getText()); //Take the number that is in the text field and parse it into an int so we can get it later... 
-						amountOfItemsTextField.setVisible(false);
-						handleTimeInterva();
-					}
-				});
-				amountOfItemsTextField.setBounds(148, 34, 130, 26);
-				frame.getContentPane().add(amountOfItemsTextField);
-				amountOfItemsTextField.setColumns(10);
-				
-	}
-	private void handleTimeInterva() {
-		//Do things with the label:
-		mainLabel.setText("How often do you want to check for deals? (Minutes)");
-		//Do things with a textBox to get the interval we need to check
-		JTextField amountOfTime = new JTextField();
-		amountOfTime.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				timeInterval = Integer.parseInt(amountOfTime.getText());
-				amountOfTime.setVisible(false); //Hide The TextField so we can generate another one
-				System.out.println(timeInterval);
-			}
-		});
-		amountOfTime.setBounds(148, 34, 130, 26);
-		frame.getContentPane().add(amountOfTime);
-		
-	}
+
 }
