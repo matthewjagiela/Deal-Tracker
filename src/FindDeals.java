@@ -10,7 +10,7 @@ import com.sun.xml.internal.txw2.Document;
 
 public class FindDeals {
 	
-	private void findDeal(String keyword) { //This will take in a specific keyword and find the deals associated with it
+	public void findDeal(String keyword) { //This will take in a specific keyword and find the deals associated with it
 		String URL = formatURL(keyword); //Format the URL with the keyword we are searching for 
 		org.jsoup.nodes.Document doc = null; 
 		String dealsFound = ""; //This is to store the deals we find 
@@ -22,7 +22,7 @@ public class FindDeals {
 					dealsFound += "\n" + link.text(); //Add it to the list of found deals
 				}
 			}
-			JOptionPane.showMessageDialog(null,dealsFound);
+			JOptionPane.showMessageDialog(null,dealsFound,"Deals Found For: " + keyword +" On Dealsea.com",JOptionPane.INFORMATION_MESSAGE);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
