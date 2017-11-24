@@ -1,12 +1,11 @@
 import java.io.IOException;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import com.sun.xml.internal.txw2.Document;
 
 public class FindDeals {
 	
@@ -22,7 +21,10 @@ public class FindDeals {
 					dealsFound += "\n" + link.text(); //Add it to the list of found deals
 				}
 			}
-			JOptionPane.showMessageDialog(null,dealsFound,"Deals Found For: " + keyword +" On Dealsea.com",JOptionPane.INFORMATION_MESSAGE);
+			final JDialog dialog = new JDialog();
+			dialog.setAlwaysOnTop(true);    
+			
+			JOptionPane.showMessageDialog(dialog,dealsFound,"Deals Found For: " + keyword +" On Dealsea.com",JOptionPane.INFORMATION_MESSAGE);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
