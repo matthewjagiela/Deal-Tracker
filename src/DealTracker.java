@@ -44,13 +44,14 @@ public class DealTracker {
 		}
 	}
 	public void dealTimer() { //The test timer right now is only going for 60 seconds 
-		Runnable dealRunnable = new Runnable() {
-		    public void run() {
+		Runnable dealRunnable = new Runnable() { //Embedded runnable
+		    public void run() { //This will be called every timeInterval minutes
 		        findDeals();
 		    }
 		};
-		ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
-		exec.scheduleAtFixedRate(dealRunnable , 0, timeInterval, TimeUnit.MINUTES);
+		ScheduledExecutorService exec = Executors.newScheduledThreadPool(1); //This will be used to schedule the methods that need to be run at X minutes 
+		
+		exec.scheduleAtFixedRate(dealRunnable , 0, timeInterval, TimeUnit.MINUTES); //Schedule the class dealRunnable to run every timeInterval minutes
 	}
 
 }
