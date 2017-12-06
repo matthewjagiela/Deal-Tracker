@@ -17,7 +17,7 @@ public class FindDeals {
 			doc = Jsoup.connect(URL).get(); //Go to the URL and get the HTML Content
 			Elements links = doc.select("a[href]"); //Sort it by links
 			for(Element link: links) { //For all links in the page...
-				if(link.text().contains(keyword)) { //If the link has the keyword....
+				if(link.text().toLowerCase().contains(keyword.toLowerCase())) { //If the link has the keyword....
 					dealsFound += "\n" + link.text(); //Add it to the list of found deals
 				}
 			}
@@ -36,6 +36,7 @@ public class FindDeals {
 		keyword = keyword.replaceAll(" ", "+"); //This is simply for efficiency. Instead of having a check and then go back through it will just replace as it checks
 		StringBuilder url = new StringBuilder("https://dealsea.com/search?q=&search_mode=Deals"); //Generic URL without search terms
 		url.insert(29, keyword); //Always insert at index 29 or the URL will be invalid
+		System.out.println(url.toString());
 		return url.toString(); //return the formatted URL in the format of string. 
 	}
 
